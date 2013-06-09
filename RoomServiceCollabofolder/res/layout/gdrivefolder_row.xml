@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+    
+     <RatingBar
+         android:id="@+id/starring"
+         android:layout_width="wrap_content"
+         android:layout_height="fill_parent"
+         android:clickable="true"
+         android:numStars="1" />
+
+     <TextView
+         android:id="@+id/gfoldername"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Name"
+         android:layout_weight="1"
+         android:textAppearance="?android:attr/textAppearanceSmall" />
+        
+     <TextView
+         android:id="@+id/gfolderroom"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Room"
+         android:layout_weight="1"
+         android:textAppearance="?android:attr/textAppearanceSmall" />
+        
+     <TextView
+         android:id="@+id/gfolderbrains"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Brains"
+         android:layout_weight="1"
+         android:textAppearance="?android:attr/textAppearanceSmall" />
+        
+     <TextView
+         android:id="@+id/gfolderowner"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Owner"
+         android:layout_weight="1"
+         android:textAppearance="?android:attr/textAppearanceSmall" />
+        
+     
+</LinearLayout>

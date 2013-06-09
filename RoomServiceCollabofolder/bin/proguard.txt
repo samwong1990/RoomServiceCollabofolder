@@ -1,3 +1,6 @@
+# view res/layout/activity_main.xml #generated:68
+-keep class com.handmark.pulltorefresh.library.PullToRefreshListView { <init>(...); }
+
 # view AndroidManifest.xml #generated:18
 -keep class hk.samwong.roomservice.android.collabofolder.MainActivity { <init>(...); }
 
