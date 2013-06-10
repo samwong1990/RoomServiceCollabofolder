@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -30,36 +31,54 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public abstract class GetGDriveFolders extends APICaller<Activity, Void, List<GDriveFolder>> {
+public abstract class GetGDriveFolders extends
+		APICaller<Void, Void, List<GDriveFolder>> {
 
-	public GetGDriveFolders(Activity context) {
-		super(context);
+	private Activity activity;
+	
+	public GetGDriveFolders(Activity activity) {
+		super(activity);
+		this.activity = activity;
 		SERVLET_URL = Defaults.GDRIVE_SERVLET_URL;
 	}
 
 	@Override
-	protected List<GDriveFolder> doInBackground(Activity... params) {
+	protected List<GDriveFolder> doInBackground(Void... params) {
 		List<GDriveFolder> temp = new LinkedList<GDriveFolder>();
 		Random r = new Random();
-		for(int i=0; i<15; i++){
-			temp.add(new GDriveFolder().withUrl(r.nextInt()+"").withBrains(r.nextInt()).withInviteOnly(r.nextBoolean()).withName(r.nextInt()+"").withOwner(r.nextInt()+"").withRoom(r.nextInt()+"").withStarred(r.nextBoolean()).withUrl(r.nextInt()+""));
+		for (int i = 0; i < 15; i++) {
+			temp.add(new GDriveFolder()
+			.withBrains(r.nextInt()).withInviteOnly(r.nextBoolean())
+			.withUrl( "https://drive.google.com/folderview?id=0B5bDAiyhg5yDTTRBRDBHcGZBNDA&usp=sharing")
+			.withName(UUID.randomUUID().toString() + UUID.randomUUID().toString() +"")
+			.withOwner(UUID.randomUUID().toString() +UUID.randomUUID().toString() + "")
+			.withRoom(UUID.randomUUID().toString() + UUID.randomUUID().toString() +"")
+			.withStarred(r.nextBoolean()));
 		}
-		if(true) return temp;
+		if (true)
+			return temp;
 		HttpURLConnection urlConnection = null;
 		try {
-			AuthenticationDetails authenticationDetails = new AuthenticationDetailsPreperator().getAuthenticationDetails(getContext());
+			AuthenticationDetails authenticationDetails = new AuthenticationDetailsPreperator()
+					.getAuthenticationDetails(getContext());
 
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-			nvps.add(new BasicNameValuePair(GDriveParameterKey.OPERATION.toString(), GDriveOperation.GetGDriveFolders.toString()));
-			nvps.add(new BasicNameValuePair(GDriveParameterKey.AUENTICATION_DETAILS.toString(), AuthenticationDetailsPreperator
-					.getAuthenticationDetailsAsJson(authenticationDetails)));
-			WifiInformation wifiscan = WifiScanner.getWifiInformation(params[0]);
-			nvps.add(new BasicNameValuePair(GDriveParameterKey.OBSERVATION.toString(), new Gson().toJson(wifiscan)));
+			nvps.add(new BasicNameValuePair(GDriveParameterKey.OPERATION
+					.toString(), GDriveOperation.GetGDriveFolders.toString()));
+			nvps.add(new BasicNameValuePair(
+					GDriveParameterKey.AUENTICATION_DETAILS.toString(),
+					AuthenticationDetailsPreperator
+							.getAuthenticationDetailsAsJson(authenticationDetails)));
+			WifiInformation wifiscan = WifiScanner
+					.getWifiInformation(activity);
+			nvps.add(new BasicNameValuePair(GDriveParameterKey.OBSERVATION
+					.toString(), new Gson().toJson(wifiscan)));
 
 			try {
 				String result = getJsonResponseFromAPICall(HttpVerb.POST, nvps);
-				ResponseWithGDriveFolders response = new Gson().fromJson(result, new TypeToken<ResponseWithGDriveFolders>() {
-				}.getType());
+				ResponseWithGDriveFolders response = new Gson().fromJson(
+						result, new TypeToken<ResponseWithGDriveFolders>() {
+						}.getType());
 				if (response.getReturnCode().equals(ReturnCode.OK)) {
 					return response.getGDriveFolders();
 				} else {
@@ -68,7 +87,8 @@ public abstract class GetGDriveFolders extends APICaller<Activity, Void, List<GD
 			} catch (Exception e) {
 				addException(e);
 			}
-			Log.w(LogTag.APICALL.toString(), "No response for the GetGDriveFolders query");
+			Log.w(LogTag.APICALL.toString(),
+					"No response for the GetGDriveFolders query");
 		} finally {
 			if (urlConnection != null)
 				urlConnection.disconnect();
