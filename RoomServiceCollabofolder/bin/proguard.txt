@@ -7,6 +7,9 @@
 # view AndroidManifest.xml #generated:28
 -keep class hk.samwong.roomservice.android.collabofolder.MakeNewRoom { <init>(...); }
 
+# onClick res/layout/activity_make_new_room.xml #generated:116
+-keepclassmembers class * { *** createFolder(...); }
+
 # onClick res/layout/activity_main.xml #generated:1
 # onClick res/layout/activity_main.xml #generated:11
 -keepclassmembers class * { *** createNewRoom(...); }
