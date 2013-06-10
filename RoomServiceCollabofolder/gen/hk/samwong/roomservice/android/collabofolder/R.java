@@ -334,7 +334,7 @@ containing a value of this type.
     public static final class id {
         public static final int RelativeLayout1=0x7f080011;
         public static final int accessRadioGroup=0x7f080025;
-        public static final int action_settings=0x7f080032;
+        public static final int action_settings=0x7f080033;
         public static final int both=0x7f080008;
         public static final int button1=0x7f080012;
         public static final int button3=0x7f080013;
@@ -342,14 +342,15 @@ containing a value of this type.
         public static final int checkBox2=0x7f08001d;
         public static final int checkBox3=0x7f08001e;
         public static final int disabled=0x7f080005;
-        public static final int fl_inner=0x7f08002c;
+        public static final int fl_inner=0x7f08002d;
         public static final int flip=0x7f08000d;
         public static final int folderName=0x7f08001f;
-        public static final int gfoldername=0x7f08002a;
-        public static final int gfolderroom=0x7f080029;
+        public static final int gfoldername=0x7f08002b;
+        public static final int gfolderroom=0x7f08002a;
         public static final int gridview=0x7f08000e;
         public static final int hybrid=0x7f080004;
         public static final int manualOnly=0x7f080009;
+        public static final int myRoomList=0x7f080028;
         public static final int none=0x7f080000;
         public static final int normal=0x7f080001;
         public static final int pullDownFromTop=0x7f08000a;
@@ -357,23 +358,24 @@ containing a value of this type.
         public static final int pullFromStart=0x7f080006;
         public static final int pullUpFromBottom=0x7f08000b;
         public static final int pull_refresh_roomlist=0x7f080014;
-        public static final int pull_to_refresh_image=0x7f08002d;
-        public static final int pull_to_refresh_progress=0x7f08002e;
-        public static final int pull_to_refresh_sub_text=0x7f080030;
-        public static final int pull_to_refresh_text=0x7f08002f;
+        public static final int pull_to_refresh_image=0x7f08002e;
+        public static final int pull_to_refresh_progress=0x7f08002f;
+        public static final int pull_to_refresh_sub_text=0x7f080031;
+        public static final int pull_to_refresh_text=0x7f080030;
         public static final int radioAnyone=0x7f080023;
         public static final int radioEdit=0x7f080026;
         public static final int radioGroup1=0x7f080020;
         public static final int radioPrivate=0x7f080024;
         public static final int radioPublic=0x7f080022;
         public static final int radioView=0x7f080027;
-        public static final int refreshRoomList=0x7f080031;
+        public static final int refreshRoomList=0x7f080032;
+        public static final int refreshUserList=0x7f080034;
         public static final int roomName=0x7f080016;
         public static final int rotate=0x7f08000c;
         public static final int satellite=0x7f080002;
         public static final int scrollview=0x7f080010;
-        public static final int starring=0x7f08002b;
-        public static final int starwrap=0x7f080028;
+        public static final int starring=0x7f08002c;
+        public static final int starwrap=0x7f080029;
         public static final int terrain=0x7f080003;
         public static final int textView1=0x7f08001b;
         public static final int textView2=0x7f080017;
@@ -387,13 +389,15 @@ containing a value of this type.
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_make_new_room=0x7f030001;
-        public static final int gdrivefolder_row=0x7f030002;
-        public static final int pull_to_refresh_header_horizontal=0x7f030003;
-        public static final int pull_to_refresh_header_vertical=0x7f030004;
+        public static final int activity_my_rooms=0x7f030002;
+        public static final int gdrivefolder_row=0x7f030003;
+        public static final int pull_to_refresh_header_horizontal=0x7f030004;
+        public static final int pull_to_refresh_header_vertical=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
         public static final int make_new_room=0x7f0a0001;
+        public static final int my_rooms=0x7f0a0002;
     }
     public static final class string {
         public static final int action_settings=0x7f05001c;
@@ -484,6 +488,7 @@ containing a value of this type.
         public static final int pull_to_refresh_refreshing_label=0x7f050018;
         public static final int pull_to_refresh_release_label=0x7f050017;
         public static final int title_activity_make_new_room=0x7f05001e;
+        public static final int title_activity_my_rooms=0x7f05001f;
     }
     public static final class style {
         /** 

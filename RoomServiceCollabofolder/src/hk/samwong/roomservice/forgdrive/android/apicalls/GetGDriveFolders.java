@@ -35,9 +35,11 @@ public abstract class GetGDriveFolders extends
 		APICaller<Void, Void, List<GDriveFolder>> {
 
 	private Activity activity;
+	private GDriveOperation operation;
 	
-	public GetGDriveFolders(Activity activity) {
+	public GetGDriveFolders(Activity activity, GDriveOperation operation) {
 		super(activity);
+		this.operation = operation;
 		this.activity = activity;
 		SERVLET_URL = Defaults.GDRIVE_SERVLET_URL;
 	}
@@ -64,7 +66,7 @@ public abstract class GetGDriveFolders extends
 
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 			nvps.add(new BasicNameValuePair(GDriveParameterKey.OPERATION
-					.toString(), GDriveOperation.GetGDriveFolders.toString()));
+					.toString(), operation.toString()));
 			nvps.add(new BasicNameValuePair(
 					GDriveParameterKey.AUENTICATION_DETAILS.toString(),
 					AuthenticationDetailsPreperator

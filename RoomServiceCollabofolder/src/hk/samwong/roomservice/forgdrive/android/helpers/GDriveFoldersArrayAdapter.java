@@ -55,7 +55,6 @@ public class GDriveFoldersArrayAdapter extends ArrayAdapter<GDriveFolder> {
 
 		final GDriveFolder folder = folders.get(position);
 		holder.star.setActivated(folder.isStarred());
-		
 		holder.name.setEllipsize(TruncateAt.MARQUEE);
 		holder.name.setText(folder.getName() + " by " + folder.getOwner());
 		holder.room.setEllipsize(TruncateAt.MARQUEE);
@@ -63,7 +62,6 @@ public class GDriveFoldersArrayAdapter extends ArrayAdapter<GDriveFolder> {
 				+ " present)");
 
 		OnClickListener openDriveLink = new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(folder
@@ -74,10 +72,8 @@ public class GDriveFoldersArrayAdapter extends ArrayAdapter<GDriveFolder> {
 						Toast.LENGTH_SHORT).show();
 			}
 		};
-
 		holder.room.setOnClickListener(openDriveLink);
 		holder.name.setOnClickListener(openDriveLink);
-
 		return row;
 	}
 

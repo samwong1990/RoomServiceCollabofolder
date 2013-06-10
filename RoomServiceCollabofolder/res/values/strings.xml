@@ -5,5 +5,6 @@
     <string name="action_settings">Refresh (Just pull up next time)</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_make_new_room">Create a new room</string>
+    <string name="title_activity_my_rooms">MyRooms</string>
 
 </resources>
