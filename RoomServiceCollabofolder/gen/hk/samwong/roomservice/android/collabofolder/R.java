@@ -334,7 +334,6 @@ containing a value of this type.
     public static final class id {
         public static final int RelativeLayout1=0x7f080011;
         public static final int accessRadioGroup=0x7f080025;
-        public static final int action_settings=0x7f080033;
         public static final int both=0x7f080008;
         public static final int button1=0x7f080012;
         public static final int button3=0x7f080013;
@@ -369,7 +368,7 @@ containing a value of this type.
         public static final int radioPublic=0x7f080022;
         public static final int radioView=0x7f080027;
         public static final int refreshRoomList=0x7f080032;
-        public static final int refreshUserList=0x7f080034;
+        public static final int refreshUserList=0x7f080033;
         public static final int roomName=0x7f080016;
         public static final int rotate=0x7f08000c;
         public static final int satellite=0x7f080002;

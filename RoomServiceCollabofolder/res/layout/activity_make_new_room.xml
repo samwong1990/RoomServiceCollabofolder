@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView3"
         android:layout_below="@+id/roomName"
@@ -96,11 +96,10 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/folderName"
         android:layout_alignBottom="@+id/folderName"
-        android:layout_toLeftOf="@+id/folderName"
         android:text="Name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

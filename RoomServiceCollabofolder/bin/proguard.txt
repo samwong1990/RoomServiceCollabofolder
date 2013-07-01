@@ -2,16 +2,16 @@
 # view res/layout/activity_my_rooms.xml #generated:11
 -keep class com.handmark.pulltorefresh.library.PullToRefreshListView { <init>(...); }
 
-# view AndroidManifest.xml #generated:19
+# view AndroidManifest.xml #generated:24
 -keep class hk.samwong.roomservice.android.collabofolder.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:28
+# view AndroidManifest.xml #generated:33
 -keep class hk.samwong.roomservice.android.collabofolder.MakeNewRoom { <init>(...); }
 
-# view AndroidManifest.xml #generated:32
+# view AndroidManifest.xml #generated:37
 -keep class hk.samwong.roomservice.android.collabofolder.MyRooms { <init>(...); }
 
-# onClick res/layout/activity_make_new_room.xml #generated:116
+# onClick res/layout/activity_make_new_room.xml #generated:115
 -keepclassmembers class * { *** createFolder(...); }
 
 # onClick res/layout/activity_main.xml #generated:1

@@ -1,5 +1,9 @@
 package hk.samwong.roomservice.android.collabofolder;
 
+import hk.samwong.roomservice.commons.dataFormat.Response;
+import hk.samwong.roomservice.commons.parameterEnums.ReturnCode;
+import hk.samwong.roomservice.forgdrive.android.apicalls.SaveNewFolder;
+
 import java.io.IOException;
 
 import android.accounts.AccountManager;
@@ -7,7 +11,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -41,9 +44,12 @@ public class MakeNewRoom extends Activity {
 	private RadioGroup permissionGroup;
 	private RadioGroup accessGroup;
 
-	private static final String tag = "MakeNewRoom";
+	private String accountName;
+	private File file;
+	
 	private static final String failureMessage = "Failed to create the folder, check your data connection and disk quota, then try again.";
-	private static final String successMessage = "Your Folder is ready.";
+	private static final String successMessage = "Your Folder is ready. Saving to RoomService's cloud.";
+	private static final String savedToRoomService = "Saved to RoomService's cloud";
 
 	@Override
 	protected void onActivityResult(final int requestCode,
@@ -52,7 +58,7 @@ public class MakeNewRoom extends Activity {
 		case REQUEST_ACCOUNT_PICKER:
 			if (resultCode == RESULT_OK && data != null
 					&& data.getExtras() != null) {
-				String accountName = data
+				accountName = data
 						.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
 				if (accountName != null) {
 					credential.setSelectedAccountName(accountName);
@@ -78,7 +84,7 @@ public class MakeNewRoom extends Activity {
 			File folder = new File();
 			folder.setMimeType("application/vnd.google-apps.folder");
 			folder.setTitle(title);
-			File file = getDriveService(credential).files().insert(folder)
+			file = getDriveService(credential).files().insert(folder)
 					.execute();
 			
 			if(visibilityViewID == R.id.radioPrivate){
@@ -131,7 +137,21 @@ public class MakeNewRoom extends Activity {
 
 	private void success() {
 		showToast(successMessage);
-		finish();
+		// save result to server
+		String roomName = roomNameView.getText().toString();
+		SaveNewFolder saveNewFolder = new SaveNewFolder(this, accountName, roomName, folderName, file.getAlternateLink()){
+			@Override
+			protected void onPostExecute(Response result) {
+				if(result.getReturnCode().equals(ReturnCode.OK)){
+					showToast(savedToRoomService);
+				}else{
+					showToast("Oops, something went wrong, try again!");
+				}
+				
+				finish();
+			}
+		};
+		saveNewFolder.execute();
 	}
 
 	public void createFolder(View view) {
@@ -160,8 +180,7 @@ public class MakeNewRoom extends Activity {
 			}
 		}.execute();
 
-		// TODO send folderID, owner, roomName back to server
-		String roomName = roomNameView.getText().toString();
+		
 	}
 
 	private Drive getDriveService(GoogleAccountCredential credential) {

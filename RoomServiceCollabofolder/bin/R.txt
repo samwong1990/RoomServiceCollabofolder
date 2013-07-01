@@ -86,7 +86,6 @@ int drawable indicator_bg_bottom 0x7f02001c
 int drawable indicator_bg_top 0x7f02001d
 int id RelativeLayout1 0x7f080011
 int id accessRadioGroup 0x7f080025
-int id action_settings 0x7f080033
 int id both 0x7f080008
 int id button1 0x7f080012
 int id button3 0x7f080013
@@ -121,7 +120,7 @@ int id radioPrivate 0x7f080024
 int id radioPublic 0x7f080022
 int id radioView 0x7f080027
 int id refreshRoomList 0x7f080032
-int id refreshUserList 0x7f080034
+int id refreshUserList 0x7f080033
 int id roomName 0x7f080016
 int id rotate 0x7f08000c
 int id satellite 0x7f080002

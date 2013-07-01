@@ -3,10 +3,9 @@ package hk.samwong.roomservice.android.collabofolder;
 import hk.samwong.roomservice.forgdrive.android.apicalls.GetGDriveFolders;
 import hk.samwong.roomservice.forgdrive.android.helpers.GDriveFoldersArrayAdapter;
 import hk.samwong.roomservice.forgdrive.commons.dataFormat.GDriveFolder;
-import hk.samwong.roomservice.forgdrive.commons.enums.GDriveOperation;
+import hk.samwong.roomservice.forgdrive.commons.dataFormat.ResponseWithGDriveFolders;
 
 import java.util.LinkedList;
-import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -26,6 +25,21 @@ public class MyRooms extends Activity {
 	private PullToRefreshListView mPullRefreshListView;
 	private ArrayAdapter<GDriveFolder> mAdapter;
 
+	OnRefreshListener<ListView> onRefreshListener = new OnRefreshListener<ListView>() {
+		@Override
+		public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+			String label = DateUtils.formatDateTime(
+					getApplicationContext(), System.currentTimeMillis(),
+					DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE
+							| DateUtils.FORMAT_ABBREV_ALL);
+
+			// Update the LastUpdatedLabel
+			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+
+			// Do work to refresh the list here.
+			new UpdateFolderList().execute();
+		}
+	};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,22 +48,6 @@ public class MyRooms extends Activity {
 		mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.myRoomList);
 
 		// Set a listener to be invoked when the list should be refreshed.
-		OnRefreshListener<ListView> onRefreshListener = new OnRefreshListener<ListView>() {
-			@Override
-			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-				String label = DateUtils.formatDateTime(
-						getApplicationContext(), System.currentTimeMillis(),
-						DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE
-								| DateUtils.FORMAT_ABBREV_ALL);
-
-				// Update the LastUpdatedLabel
-				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-
-				// Do work to refresh the list here.
-				new UpdateFolderList().execute();
-			}
-		};
-
 		mPullRefreshListView.setOnRefreshListener(onRefreshListener);
 
 		ListView actualListView = mPullRefreshListView.getRefreshableView();
@@ -68,15 +66,12 @@ public class MyRooms extends Activity {
 		onRefreshListener.onRefresh(mPullRefreshListView);
 	}
 
-	private static final int MANUAL_REFRESH = 0;
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		switch (item.getItemId()) {
-		case MANUAL_REFRESH:
-			new UpdateFolderList().execute();
-			mPullRefreshListView.setRefreshing(false);
+		case R.id.refreshUserList:
+			onRefreshListener.onRefresh(mPullRefreshListView);
 			break;
 		}
 
@@ -92,13 +87,13 @@ public class MyRooms extends Activity {
 
 	private class UpdateFolderList extends GetGDriveFolders {
 		public UpdateFolderList() {
-			super(thisActivity, GDriveOperation.GetUserFolders);
+			super(thisActivity);
 		}
 
 		@Override
-		protected void onPostExecute(List<GDriveFolder> result) {
+		protected void onPostExecute(ResponseWithGDriveFolders result) {
 			mListItems.clear();
-			mListItems.addAll(result);
+			mListItems.addAll(result.getGDriveFolders());
 			mAdapter.notifyDataSetChanged();
 
 			// Call onRefreshComplete when the list has been
